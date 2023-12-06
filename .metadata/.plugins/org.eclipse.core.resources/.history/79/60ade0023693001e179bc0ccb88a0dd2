@@ -1,0 +1,31 @@
+package com.all.customer;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class CustomerService {
+
+	@Autowired
+	private final CustomerRepository customerRepository;
+
+	Customer createCustomer(Customer customer) {
+		Customer saveCustomer = customerRepository.save(customer);
+		return saveCustomer;
+	}
+
+	List<Customer> getAllCustomer() {
+		List<Customer> allCustomer = customerRepository.findAll();
+		return allCustomer;
+	}
+
+	Customer customerById(Integer id) {
+		return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("customer not found with id : " + id));
+	}
+
+}

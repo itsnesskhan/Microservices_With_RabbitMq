@@ -1,0 +1,6 @@
+package com.all.fraud;
+
+public class FrauCheckResponse {
+
+	private boolean isFraudster;
+}

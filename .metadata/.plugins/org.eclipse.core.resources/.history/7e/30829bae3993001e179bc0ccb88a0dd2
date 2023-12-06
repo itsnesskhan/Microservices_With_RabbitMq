@@ -1,0 +1,5 @@
+package com.all.fraud;
+
+public class FrauCheckResponse {
+
+}

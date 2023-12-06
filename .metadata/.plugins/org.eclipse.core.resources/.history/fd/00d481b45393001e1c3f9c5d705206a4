@@ -1,0 +1,62 @@
+package com.all.customer;
+
+import java.util.List;
+
+import javax.management.Notification;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class CustomerService {
+
+	
+	@Autowired
+	private final RestTemplate restTemplate;
+	
+	@Autowired
+	private final CustomerRepository customerRepository;
+
+	Customer createCustomer(Customer customer) {
+		//check if email is valid
+		//check if email is not taken
+		Customer saveCustomer = customerRepository.saveAndFlush(customer);
+		//check if fraudster
+		FrauCheckResponse frauCheckResponse = restTemplate.getForObject("http://localhost:8081/fraud-check/{customerId}", FrauCheckResponse.class, saveCustomer.getId());
+		
+		if (frauCheckResponse.isFraudster()) {
+			throw new IllegalStateException("He is Fraudster");
+		}
+		// send notification
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		
+		new HttpEntity<>(
+				Notification.bu
+				)
+//		restTemplate.postForObject(
+//				"http://localhost:8082/notification"
+//				null,
+//	
+//				)
+		
+		return saveCustomer;
+	}
+
+	List<Customer> getAllCustomer() {
+		List<Customer> allCustomer = customerRepository.findAll();
+		return allCustomer;
+	}
+
+	Customer customerById(Integer id) {
+		return customerRepository.findById(id).orElseThrow(() -> new RuntimeException("customer not found with id : " + id));
+	}
+
+}

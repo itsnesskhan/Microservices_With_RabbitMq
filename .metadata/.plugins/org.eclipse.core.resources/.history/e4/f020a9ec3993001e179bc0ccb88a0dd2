@@ -1,0 +1,9 @@
+package com.all.fraud;
+
+import lombok.Data;
+
+@Data
+public class FrauCheckResponse {
+
+	private boolean isFraudster;
+}

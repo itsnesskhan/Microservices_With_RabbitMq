@@ -1,0 +1,8 @@
+package com.all.fraud;
+
+public class FraudCheckHistory {
+	
+	private Integer id;
+	private 
+
+}

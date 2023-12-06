@@ -1,0 +1,5 @@
+package com.all.customer;
+
+public interface CustomerRepository {
+
+}

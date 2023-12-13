@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		scanBasePackages = {
                 "com.all.notification",
                 "com.all.rabbit.mq",
+                "com.all.security.library"
         })
 public class NotificationServiceApplication {
 

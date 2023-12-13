@@ -1,0 +1,11 @@
+package com.all.auth.payloads;
+
+import lombok.Data;
+
+@Data
+public class LoginRequest {
+
+	private String email;
+	private String password;
+	
+}

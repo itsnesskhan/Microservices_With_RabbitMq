@@ -21,4 +21,5 @@ public class NotificationConsumer {
         log.info("Consumed {} from queue", notificationRequest);
         notificationService.sendNotification(notificationRequest);
     }
+    
 }

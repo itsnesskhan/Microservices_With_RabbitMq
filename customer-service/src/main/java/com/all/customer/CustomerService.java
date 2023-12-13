@@ -7,11 +7,14 @@ import javax.management.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.all.rabbit.mq.RabbitMQMessageProducer;
+import com.all.security.library.payloads.SharedData;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,20 +39,27 @@ public class CustomerService {
 		//check if email is not taken
 		Customer saveCustomer = customerRepository.saveAndFlush(customer);
 		//check if fraud
-		FrauCheckResponse frauCheckResponse = restTemplate.getForObject("http://localhost:9091/fraud-check/{customerId}", FrauCheckResponse.class, saveCustomer.getId());
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.set(HttpHeaders.AUTHORIZATION, SharedData.getSharedDataMap().get("jwtToken"));
+		HttpEntity<Object> entity = new HttpEntity<>(null, httpHeaders);
 		
-		if (frauCheckResponse.isFraudster()) {
+		 ResponseEntity<FrauCheckResponse> responseEntity = restTemplate.exchange(
+				 	"http://localhost:9091/fraud-check/{customerId}",
+	                HttpMethod.GET,
+	                entity,
+	                FrauCheckResponse.class,
+	                customer.getId());
+		
+		if (responseEntity.getBody().isFraudster()) {
 			throw new IllegalStateException("He is Fraudster");
 		}
-		// send notification
-//		HttpHeaders httpHeaders = new HttpHeaders();
+//		 send notification
 //		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-//		
 //		HttpEntity<NotificationRequest> httpEntity = new HttpEntity<>(
 //				NotificationRequest.builder()
 //				.toCustomerId(saveCustomer.getId())
 //				.toCustomerEmail(saveCustomer.getEmail())
-//				.message(String.format("Hi %s, welcome to Nessprivates...!", saveCustomer.getName()))
+//				.message(String.format("Hi %s, welcome to abcprivates...!", saveCustomer.getName()))
 //				.build(),
 //				httpHeaders
 //				);
@@ -59,11 +69,11 @@ public class CustomerService {
 //				httpEntity
 //				);
 		
-		//SENDING ASYNC NOTIFICATION WITH RABBITMQ
+//		//SENDING ASYNC NOTIFICATION WITH RABBITMQ
 		NotificationRequest notificationRequest = NotificationRequest.builder()
 		.toCustomerId(saveCustomer.getId())
 		.toCustomerEmail(saveCustomer.getEmail())
-		.message(String.format("Hi %s, welcome to Nessprivates...!", saveCustomer.getName()))
+		.message(String.format("Hi %s, welcome to abcprivates...!", saveCustomer.getName()))
 		.build();
 		
 		 rabbitMQMessageProducer.publish(

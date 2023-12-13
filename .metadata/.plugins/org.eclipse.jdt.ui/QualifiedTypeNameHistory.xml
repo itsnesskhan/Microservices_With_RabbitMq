@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.all.rabbit.mq.RabbitMQMessageProducer"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="com.all.security.library.jwt.JwtAuthenticationEntryPoint"/>
+    <fullyQualifiedTypeName name="com.all.security.library.jwt.JwtAuthenticationFilter"/>
+    <fullyQualifiedTypeName name="com.all.auth.payloads.TimeUtil"/>
+    <fullyQualifiedTypeName name="com.all.auth.dto.AuthenticationResponse"/>
+    <fullyQualifiedTypeName name="org.springframework.security.authentication.AuthenticationManager"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="com.all.auth.repo.CustomerRepository"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="com.all.auth.dto.Customer"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.User"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.all.auth.payloads.Customer"/>
+    <fullyQualifiedTypeName name="com.all.auth.payloads.LoginRequest"/>
+    <fullyQualifiedTypeName name="com.all.auth.service.LoginService"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.Class"/>
+    <fullyQualifiedTypeName name="com.all.security.library.payloads.CommonResponse"/>
+    <fullyQualifiedTypeName name="com.all.auth.payloads.LoginResponse"/>
+    <fullyQualifiedTypeName name="com.all.security.library.jwt.JwtTokenUtil"/>
 </qualifiedTypeNameHistroy>
